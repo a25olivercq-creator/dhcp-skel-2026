@@ -1,5 +1,5 @@
 $TTL    86400
-@       IN      SOA     arya.targaryen.lan. admin.test.lan. (
+@       IN      SOA     arya.stark.lan. admin.test.lan. (
                         5  ; Número de serie
                         3600        ; Actualización (Refresh)
                         1800        ; Reintento (Retry)
@@ -7,8 +7,7 @@ $TTL    86400
                         86400 )     ; TTL mínimo
 
 ; Servidores de nomes
-@       IN      NS      arya.targaryen.lan.
+@       IN      NS      arya.stark.lan.
 
 ; Rexistros A dos servidores de nomes
-@             IN      A       192.168.12.1
-arya          IN      A       192.168.12.1
+@             IN      A       192.168.11.9

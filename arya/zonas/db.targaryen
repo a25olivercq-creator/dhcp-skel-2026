@@ -7,8 +7,7 @@ $TTL    86400
                         86400 )     ; TTL mínimo
 
 ; Servidores de nomes
-@       IN      NS      arya.test.lan.
+@       IN      NS      arya.stark.lan.
 
 ; Rexistros A dos servidores de nomes
-@             IN      A       192.168.10.1
-arya          IN      A       192.168.10.1
+@             IN      A       192.168.12.9
