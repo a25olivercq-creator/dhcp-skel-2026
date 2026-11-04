@@ -96,6 +96,21 @@ services:
       - ned
       - cliente2
 
+  cliente5:
+    build: ./docker/cliente
+    container_name: cliente5
+    networks:
+      rede2:
+        ipv4_address: 192.168.11.224
+
+    command: >
+      sh -c "dhclient -v eth0 && sleep infinity"
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - ned
+      - cliente2
+
 networks:
   dhcp_lab:
     driver: bridge

@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
         && rm -rf /var/lib/apt/lists/*
 
 COPY kea-dhcp4.conf.json /etc/kea/kea-dhcp4.conf
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod a+x /entrypoint.sh
 
 RUN mkdir -p /run/kea /var/run/kea /var/lib/kea && \
     touch /var/lib/kea/kea-leases4.csv && \
