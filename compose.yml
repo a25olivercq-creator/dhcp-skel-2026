@@ -19,6 +19,8 @@ services:
   arya:
     build: docker/dnsserver
     hostname: arya
+    environment:
+      - GATEWAY=192.168.10.2
     networks: 
       dhcp_lab:
         ipv4_address: 192.168.10.9  
@@ -28,11 +30,17 @@ services:
   ned:
     build: ./docker/kea
     container_name: ned
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - GATEWAY=192.168.10.2
     networks:
       dhcp_lab:
         ipv4_address: 192.168.10.2
     volumes:
       - ./ned/kea-dhcp4.conf.json:/etc/kea/kea-dhcp4.conf
+      - ./logs:/var/log/kea
+      - ./ned/kea-dhcp-dns.json:/etc/kea/kea-dhcp-ddns.conf
   
 
   
@@ -101,7 +109,22 @@ services:
     container_name: cliente5
     networks:
       rede2:
-        ipv4_address: 192.168.11.224
+        ipv4_address: 192.168.11.51
+
+    command: >
+      sh -c "dhclient -v eth0 && sleep infinity"
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - ned
+      - cliente2
+
+  cliente6:
+    build: ./docker/cliente
+    container_name: cliente6
+    networks:
+      rede3:
+        ipv4_address: 192.168.12.155
 
     command: >
       sh -c "dhclient -v eth0 && sleep infinity"
